@@ -22,7 +22,7 @@ export class AuthService{
         const savedUser = await this.userRepository.findOne({email:email})
         
         // return error if user is not available
-        if(!savedUser) throw new HttpException("User not found", HttpStatus.UNAUTHORIZED)
+        if(!savedUser) throw new HttpException("User does not exist", HttpStatus.INTERNAL_SERVER_ERROR)
 
         //compare passwords
         const paswordComparison = await compare(savedUser.password, password)
